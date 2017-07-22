@@ -24,6 +24,8 @@ import com.andela.sylvester.alcommunity.data.model.Post;
 import com.andela.sylvester.alcommunity.data.model.student;
 import com.andela.sylvester.alcommunity.data.remote.APIService;
 import com.andela.sylvester.alcommunity.data.remote.ApiUtils;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.io.File;
 import java.net.URL;
@@ -93,7 +95,14 @@ public class student_details extends AppCompatActivity {
 
         if(pst.getPicUrl() != null){
             pbLoading.setVisibility(View.VISIBLE);
-            new DownloadImageTask(img, pbLoading).execute(pst.getPicUrl());
+            Glide.with(this)
+                    .load(pst.getPicUrl())
+                    .placeholder(R.drawable.ic_person_black_24dp)
+                    .centerCrop()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(img);
+            pbLoading.setVisibility(View.INVISIBLE);
+            //new DownloadImageTask(img, pbLoading).execute(pst.getPicUrl());
         }
         else {
             pbLoading.setVisibility(View.INVISIBLE);

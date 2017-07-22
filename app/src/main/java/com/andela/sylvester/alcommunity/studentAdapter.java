@@ -18,6 +18,8 @@ import com.andela.sylvester.alcommunity.data.model.DownloadImageTask;
 import com.andela.sylvester.alcommunity.data.model.student;
 import com.andela.sylvester.alcommunity.data.remote.APIService;
 import com.andela.sylvester.alcommunity.data.remote.ApiUtils;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -67,7 +69,14 @@ public class studentAdapter   extends ArrayAdapter<student> {
 
             if(picUser != null){
                 if(p.getPicUrl() != null){
-                    new DownloadImageTask(picUser, imgLoading).execute(p.getPicUrl());
+                    Glide.with(getContext())
+                            .load(p.getPicUrl())
+                            .placeholder(R.drawable.ic_person_black_24dp)
+                            .centerCrop()
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .into(picUser);
+                    imgLoading.setVisibility(View.INVISIBLE);
+                    //new DownloadImageTask(picUser, imgLoading).execute(p.getPicUrl());
                 }
                 else {
                     imgLoading.setVisibility(View.INVISIBLE);
@@ -84,6 +93,7 @@ public class studentAdapter   extends ArrayAdapter<student> {
             if (lblRG != null) {
                 lblRG.setText(p.getRegion());
             }
+
         }
 
         return v;

@@ -1,5 +1,7 @@
 package com.andela.sylvester.alcommunity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -62,8 +64,31 @@ public class RegisterActivity extends AppCompatActivity {
                 obj.setRegion(txtRegion.getText().toString());
                 obj.setState(txtState.getText().toString());
                 obj.setPhone(txtPhone.getText().toString());
+                if(txtCoderName.getText().toString().matches("") | txtName.getText().toString().matches("") | txtEmail.getText().toString().matches("") | txtPassword.getText().toString().matches("") | txtPhone.getText().toString().matches("") | txtAddress.getText().toString().matches("") | txtRegion.getText().toString().matches("") | txtState.getText().toString().matches("")){
+                    AlertDialog alertDialog = new AlertDialog.Builder(RegisterActivity.this).create();
 
-                sendPost(obj);
+                    // Setting Dialog Title
+                    alertDialog.setTitle("Alert Dialog");
+
+                    // Setting Dialog Message
+                    alertDialog.setMessage("All fields are required!");
+
+                    // Setting Icon to Dialog
+                    alertDialog.setIcon(R.drawable.ic_error_black_24dp);
+
+                    // Setting OK Button
+                    alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Write your code here to execute after dialog closed
+                        }
+                    });
+
+                    // Showing Alert Message
+                    alertDialog.show();
+                }
+                else{
+                    sendPost(obj);
+                }
             }
         });
     }

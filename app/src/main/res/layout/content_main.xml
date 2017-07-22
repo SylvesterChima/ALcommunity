@@ -18,7 +18,8 @@
         android:layout_height="wrap_content"
         android:src="@drawable/andela"
         android:layout_marginTop="50dp"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:id="@+id/imgMain"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
